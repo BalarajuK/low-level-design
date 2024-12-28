@@ -2,7 +2,6 @@ package com.meghasys.demo.snakeladder;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.Random;
 
 public class Game {
 
@@ -26,7 +25,7 @@ public class Game {
         System.out.println("Snake And Ladder Game");
         System.out.println("======================================");
         boolean gameOver = false;
-        while (!gameOver) {
+        while (!gameOver && !players.isEmpty()) {
             Player player = players.poll();
             int nextScore = dice.roll();
             System.out.println("Player " + player.getName() + " score:" + nextScore);

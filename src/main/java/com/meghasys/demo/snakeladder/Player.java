@@ -1,7 +1,7 @@
 package com.meghasys.demo.snakeladder;
 
 public class Player {
-    private String name;
+    private final String name;
     private int currLoc;
 
     public Player(String name, int currLoc) {

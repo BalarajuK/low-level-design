@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Board {
-    private static int WINNING_SCORE = 100;
-    private Map<Integer, IObject> objectMap;
+    private static final int WINNING_SCORE = 100;
+    private final Map<Integer, IObject> objectMap;
 
     public Board(int[][] snakes, int[][] ladders) {
         objectMap = new HashMap<>();
@@ -13,7 +13,7 @@ public class Board {
             objectMap.put(loc[0], new Snake(loc[1] - loc[0]));
         }
 
-        for (int[] loc : snakes) {
+        for (int[] loc : ladders) {
             objectMap.put(loc[0], new Ladder(loc[1] - loc[0]));
         }
     }

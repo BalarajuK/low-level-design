@@ -2,13 +2,13 @@ package com.meghasys.demo.snakeladder;
 
 public class AbstractObject implements IObject{
 
-    private int xMove;
+    private final int moves;
     public AbstractObject(int xMove) {
-        this.xMove = xMove;
+        this.moves = xMove;
     }
 
     @Override
     public int move() {
-        return xMove;
+        return moves;
     }
 }
