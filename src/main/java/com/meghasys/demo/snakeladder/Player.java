@@ -2,28 +2,27 @@ package com.meghasys.demo.snakeladder;
 
 public class Player {
     private final String name;
-    private int currLoc;
+    private int location;
 
     public Player(String name, int currLoc) {
         this.name = name;
-        this.currLoc = currLoc;
+        this.location = currLoc;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getCurrLoc() {
-        return currLoc;
+    public int getLocation() {
+        return location;
     }
 
-    public int move(int loc){
-        this.currLoc = loc;
-        return this.currLoc;
+    public void setLocation(int loc){
+        this.location = loc;
     }
 
     public void print(){
-        System.out.println("Player "+name+" at location: "+currLoc);
+        System.out.println("Player "+name+" at location: "+ location);
     }
 
 }

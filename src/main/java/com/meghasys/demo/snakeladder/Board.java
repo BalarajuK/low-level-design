@@ -22,7 +22,7 @@ public class Board {
     public boolean move(Player player, int points) {
         System.out.println("Player " + player.getName() + ": " + points);
 
-        nextMove(player, player.getCurrLoc() + points);
+        nextMove(player, player.getLocation() + points);
 
         if (isWin(player)) {
             return true;
@@ -30,7 +30,7 @@ public class Board {
 
         IObject object = objectMap.get(points);
         if (object != null) {
-            int loc = object.move() + player.getCurrLoc();
+            int loc = object.move() + player.getLocation();
             nextMove(player, loc);
         }
 
@@ -39,16 +39,13 @@ public class Board {
     }
 
     private static void nextMove(Player player, int loc) {
-        if(loc <=WINNING_SCORE){
-            player.move(loc);
+        if (loc <= WINNING_SCORE) {
+            player.setLocation(loc);
         }
     }
 
     private boolean isWin(Player player) {
-        return player.getCurrLoc() == WINNING_SCORE;
+        return player.getLocation() == WINNING_SCORE;
     }
 
-    private String getKey(int x, int y) {
-        return x + "-" + y;
-    }
 }
