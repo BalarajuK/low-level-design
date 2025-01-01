@@ -6,7 +6,7 @@ import com.meghasys.demo.lld.vendingmachine.VendingMachine;
 
 public class ProductSelectionState implements IState {
 
-    private final double amount;
+    private double amount;
     private int itemCode;
 
     public ProductSelectionState(double amount) {
@@ -19,6 +19,7 @@ public class ProductSelectionState implements IState {
         if(item != null){
             DispenseItem state = new DispenseItem(item);
             machine.setState(state);
+            amount -= item.getPrice();
         }
         else {
             machine.setState(new IdleState());
@@ -29,5 +30,9 @@ public class ProductSelectionState implements IState {
 
     public void selectItem(int itemCode){
         this.itemCode = itemCode;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 }

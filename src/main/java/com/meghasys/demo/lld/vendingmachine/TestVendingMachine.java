@@ -3,6 +3,9 @@ package com.meghasys.demo.lld.vendingmachine;
 import com.meghasys.demo.lld.vendingmachine.state.CoinAcceptState;
 import com.meghasys.demo.lld.vendingmachine.state.ProductSelectionState;
 
+import java.util.Scanner;
+import java.util.function.Supplier;
+
 public class TestVendingMachine {
 
     public static void main(String[] args) {
@@ -14,22 +17,32 @@ public class TestVendingMachine {
         System.out.println("=================================");
         System.out.println("Start buying");
 
+        Scanner scanner = new Scanner(System.in);
+        buyItem(machine, () -> {
+            System.out.print("Insert amount: ");
+            return scanner.nextInt();
+        }, () -> {
+            System.out.print("Select Item[101/102/103]: ");
+            return scanner.nextInt();
+        });
+
+    }
+
+    private static void buyItem(VendingMachine machine, Supplier<Integer> amount, Supplier<Integer> itemCode) {
         IState state = machine.getState();
         state.newItemRequest(machine);
 
         CoinAcceptState coinState = (CoinAcceptState) machine.getState();
-        coinState.addCurrency(1);
+        coinState.addCurrency(amount.get());
 
         coinState.startProductSelection(machine);
 
         ProductSelectionState prodSel = (ProductSelectionState) machine.getState();
-        prodSel.selectItem(102);
+        prodSel.selectItem(itemCode.get());
         Item item = prodSel.dispenseItems(machine);
-
-        System.out.println("Item from machine = "+item.getType());
-
-
-
-
+        if(item!=null){
+            System.out.println("Dispensed an item = " + item.getType());
+        }
+        System.out.println("Collect change: " + prodSel.getAmount());
     }
 }

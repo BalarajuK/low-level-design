@@ -1,16 +1,35 @@
 package com.meghasys.demo.lld.vendingmachine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemShelf {
-    private Item item;
+    private final List<Item> items;
     private int code;
     private boolean isSoldOut;
 
-    public Item getItem() {
-        return item;
+    public ItemShelf() {
+        items = new ArrayList<>();
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public Item removeItem() {
+        if(!items.isEmpty()){
+            Item item = items.remove(items.size() - 1);
+            if(items.isEmpty()){
+                setSoldOut(true);
+            }
+            return item;
+        }
+        return null;
+    }
+
+    public void addItem(Item item) {
+        this.items.add(item);
+        setSoldOut(false);
     }
 
     public int getCode() {
